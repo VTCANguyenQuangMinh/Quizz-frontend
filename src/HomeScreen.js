@@ -8,9 +8,9 @@ export default function HomeScreen({ navigation }) {
   
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
+        <Text>Trang Chủ Quizz</Text>
         <Button
-          title="Lets get start!"
+          title="Bắt đầu!"
           onPress={() => {
             /* 1. Navigate to the Details route with params */
             navigation.navigate('Quizz', {

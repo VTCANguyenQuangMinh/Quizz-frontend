@@ -9,8 +9,9 @@ export default function ResultScreen({ route, navigation }) {
   const [Result, setResult] = useState([])
   const [score, setScore] = useState(0)
 
+  
+  
   useEffect(() => {
-      
       API().then((data)=>{
           setResult(data)
           setScore(2.5)
@@ -20,13 +21,14 @@ export default function ResultScreen({ route, navigation }) {
 
   const ViewResult = Result.map((Answer) =>
       <View key = {Answer.questionId} style={styles.component}>
-        <Text>Question {Answer.questionId}:</Text>
-        <Text>Your answers: {answers(Answer.UsersAnswers)}</Text>
-        <Text>Correct answers: {answers(Answer.CorrectAnswers)}</Text>
+        <Text>Câu {Answer.questionId}:</Text>
+        <Text>Câu trả lời của bạn: {answers(Answer.UsersAnswers)}</Text>
+        <Text>Câu trả lời đúng: {answers(Answer.CorrectAnswers)}</Text>
       </View>
     );
 
   function answers(listAnswer){
+
     const ViewResult = listAnswer.map((Answer) =>
       <Text key = {Answer.answerId}> {Answer.answer} , </Text>
     );
@@ -39,11 +41,11 @@ export default function ResultScreen({ route, navigation }) {
     <View style={{ flex: 1 }}>
 
       <View >{ViewResult}</View>
-      <Text style={styles.component}>Your Score: {score}</Text>
+      <Text style={styles.component}>Điểm của bạn: {score}</Text>
 
       <View style={styles.navBottom}>
         <View></View>
-        <Button title="🏠" onPress={() => navigation.navigate('Home')} />
+        <Button title="🏠" onPress={() => navigation.navigate('Trang Chủ')} />
         <View></View>
       </View>
     </View>

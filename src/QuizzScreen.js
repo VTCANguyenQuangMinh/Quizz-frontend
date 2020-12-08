@@ -14,11 +14,14 @@ function  QuizzsScreen({ route, navigation }) {
     const [Question, setQuestion] = useState("")
     const [QuestionType, setQuestionType] = useState("")
     const [Quizz, setQuizz] = useState({
-      questionId:route.params.QuestId,
-      ListSelectedAnswers:[]
+      QuestionID:route.params.QuestId,
+      AnswersID:[]
     })
     const [ListQuizz, setListQuizz] = useState(route.params.ListQuizz)
-    const [Answers, setAnswers] = useState([])
+    const [Answers, setAnswers] = useState([{
+      "answerId": 0,
+      "answer": ""
+  }])
  
     
 
@@ -60,12 +63,9 @@ function  QuizzsScreen({ route, navigation }) {
     })
 
     function handleSelectAnswer(arr){
-
-      console.log(Quizz.questionId)
-
       setQuizz({
-        questionId:QuestId,
-        ListSelectedAnswers:arr
+        QuestionID:QuestId,
+        AnswersID:arr
       })
 
       if(ListQuizz.length ==0){
@@ -76,10 +76,9 @@ function  QuizzsScreen({ route, navigation }) {
       let check = null
       
       for(let i =0; i<ListQuizz.length; i++){
-        console.log(ListQuizz.length+'ok')
-        console.log(ListQuizz)
         
-        if(ListQuizz[i].questionId == Quizz.questionId){
+        
+        if(ListQuizz[i].QuestionID == Quizz.QuestionID){
           
           ListQuizz[i]=Quizz
           check = 1
@@ -92,10 +91,12 @@ function  QuizzsScreen({ route, navigation }) {
         arr2.push(Quizz)
         setListQuizz(arr2)
       }
+
+      console.log(ListQuizz)
      
     }
   
-    let JSXAnswers = QuestionType != "multi"? <ListSingleAnswers listsSelectAnswers={Quizz.ListSelectedAnswers}  listAnswers= {Answers} HandlelistsSelectAnswers={handleSelectAnswer}/>:<ListMultiAnswers listsSelectAnswers={Quizz.ListSelectedAnswers} HandlelistsSelectAnswers={handleSelectAnswer} listAnswers= {Answers} />
+    let JSXAnswers = QuestionType != "multi"? <ListSingleAnswers listsSelectAnswers={Quizz.AnswersID}  listAnswers= {Answers} HandlelistsSelectAnswers={handleSelectAnswer}/>:<ListMultiAnswers listsSelectAnswers={Quizz.AnswersID} HandlelistsSelectAnswers={handleSelectAnswer} listAnswers= {Answers} />
   
     let button = nextID != null?<Button
       title="⟶"
@@ -108,7 +109,8 @@ function  QuizzsScreen({ route, navigation }) {
     /> : <Button
     title="⬆"
     onPress={() =>
-      navigation.navigate('Result', {
+      
+      navigation.navigate('Kết Quả', {
         ListQuizz : ListQuizz
       })
     }
@@ -119,13 +121,13 @@ function  QuizzsScreen({ route, navigation }) {
     return (
       
       <View style={styles.Container}>    
-        <Text style = {styles.Question}>Question {QuestId}: {Question}</Text>
+        <Text style = {styles.Question}>Câu {QuestId}: {Question}</Text>
         
         {JSXAnswers}
       
         <View style={styles.navBottom}>
           <View  ><Button style={{height:100}} title="⟵" onPress={() => navigation.goBack()} /></View>
-          <View ><Button title="🏠" onPress={() => navigation.navigate('Home')} /></View>
+          <View ><Button title="🏠" onPress={() => navigation.navigate('Trang Chủ')} /></View>
           
           <View >{button}</View>
         </View>

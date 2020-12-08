@@ -18,9 +18,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Trang Chủ" component={HomeScreen} />
         <Stack.Screen name="Quizz" component={QuizzsScreen} />
-        <Stack.Screen name="Result" component={ResultScreen} />
+        <Stack.Screen name="Kết Quả" component={ResultScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
